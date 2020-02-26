@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+   
+</head>
+
+<body>
+    <!-- <div class="login">
+        <h2>登录</h2>
+        <div>
+            UserName: <input type="text" name="userName" id="username">
+        </div>
+        <div>
+            Password: <input type="passwode" name="password" id="passwode">
+        </div>
+        <div>
+            <button onclick="clickInfo()">Login</button>
+        </div>
+    </div> -->
+
+    <form action="./isLogin" method="POST">
+        <input type="text" name="userName"><br>
+        <input type="password" name="passwode"><br>
+        <input type="submit" value="login">
+    
+    
+    </form>
+  
+</body>
+<script src="./ajax.js"></script>
+<script>
+    // const input = document.getElementsByTagName('input');
+    // function clickInfo(){
+    //     const params = {};
+    //     params.userName = input[0].value;
+    //     params.password = input[1].value;
+    //     $.ajax({
+    //     url: '/isLogin',
+    //     type: 'post',
+    //     params,
+    //     success(data){
+    //         console.log(data)
+    //         if(data == 'ok'){
+    //             location.href = '/main.html'
+    //         }
+
+    //     }
+    // })
+    // }
+
+   
+
+</script>
+
+</html>

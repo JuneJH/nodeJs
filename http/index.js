@@ -4,6 +4,7 @@ const fs = require('fs');
 const configGlob = require('./config');  // 引入全局配置文件
 const pathSet = require('./loader');     // 引入加载文件
 const log = require('./log')             // 打日志
+const filterLoader = require('./filterLoader') // 导入拦截器
 
 
 // 创建一个链接，底层调用net层的该方法，即tcp
@@ -13,6 +14,12 @@ http.createServer(function (request, response) {
     // 得到相应的属性
     const urlName = requestUrl.pathname;
     const params = requestUrl.query;
+
+    for(let i = 0; i < filterLoader.length; i ++){
+        if(!filterLoader[i](request,response)){
+            return;
+        }
+    }
     //判断是否请求为静态资源
     const isStatic = isStaticRequest(urlName);
     //请求静态资源
@@ -30,13 +37,12 @@ http.createServer(function (request, response) {
             response.write("<html><body><h1>404 NotFound</h1></body></html>");
             response.end();
         }
-    } else {
-        console.log(pathSet.get(urlName))
+    } else {//请求动态资源
         if (pathSet.get(urlName)) {
             try {
                 pathSet.get(urlName)(request, response);
             } catch (e) {
-                log('服务器错误 ' + urlName)
+                log('服务器错误' + urlName)
                 response.writeHead(500);
                 response.write('<html><body><h1>500 Badserver</h1></body></html>')
                 response.end();

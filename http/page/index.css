@@ -1,0 +1,12 @@
+html,body{
+    margin:0;
+    padding:0;
+}
+.login{
+    width: 300px;
+    margin: 100px auto;
+    line-height: 1;
+}
+.login div{
+    margin-top: 20px;
+}

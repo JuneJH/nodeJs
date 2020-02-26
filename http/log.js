@@ -3,7 +3,7 @@ const confiGlob = require('./config')
 const fileName = confiGlob.log_path  + confiGlob.log_name;
 function log(data){
     //异步打印日志文件
-    fs.writeFile(fileName,data+'\n',{flag:'a'},function(){})
+    fs.writeFile(fileName,new Date().toLocaleString() + data+'\n',{flag:'a'},function(){})
 
 }
 

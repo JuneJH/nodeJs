@@ -36,16 +36,16 @@ var $ = {
           if (xhr.status == 200) {
             /*根据响应头的content-type属性指定方法接收到的内容*/
             var contentType = xhr.getResponseHeader('content-type');
-            var data = null;
-            if (contentType.indexOf('json') > -1) {
-              data = JSON.parse(xhr.responseText);
-            } else if (contentType.indexOf('xml') > -1) {
-              data = xhr.responseXML;
-            } else {
-              data = xhr.responseText;
-            }
+            // var data = null;
+            // if (contentType.indexOf('json') > -1) {
+            //   data = JSON.parse(xhr.responseText);
+            // } else if (contentType.indexOf('xml') > -1) {
+            //   data = xhr.responseXML;
+            // } else {
+            //   data = xhr.responseText;
+            // }
             /*执行成功函数*/
-            options.success && options.success(data);
+            options.success && options.success(xhr.responseText);
           } else {
             options.error && options.error(xhr.responseText);
           }
