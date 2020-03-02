@@ -77,7 +77,7 @@ Http请求主要包括
 
 2. HTTP cache 机制
 
- - 强缓存 通过属性cache-control（设置的是时间段，优先级高于expres）和expres（设置的是时间戳，依赖本地时间）设置
+ - 强缓存 通过属性cache-control（设置的是时间段，优先级高于expires）和expires（设置的是时间戳，依赖本地时间）设置
  - 协商缓存 通过设置last-modified和Etag，这两个互补使用，他们不同在于对文件资源是否发生变化的监听上不同
 
 ## 本地存储
