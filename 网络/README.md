@@ -67,6 +67,28 @@ Http请求主要包括
 3. Header压缩，会在两端维护一个索引表，已经发送过的请求头字段将不再发送，减小请求头的大小
 4. 服务端push，服务端可以在一次请求后主动发送其他的资源
 
+## 缓存位置
+
+1. 按优先级依次查
+ - memory cache         内存缓存，一般较小的资源，进程结束就清空
+ - service worker cache 实现离线缓存，因为需要拦截，所以要求是https协议 
+ - HTTP cache           强缓存 协商缓存
+ - push cache           http2
+
+2. HTTP cache 机制
+
+ - 强缓存 通过属性cache-control（设置的是时间段，优先级高于expres）和expres（设置的是时间戳，依赖本地时间）设置
+ - 协商缓存 通过设置last-modified和Etag，这两个互补使用，他们不同在于对文件资源是否发生变化的监听上不同
+
+## 本地存储
+
+ - cookie
+ - webStorage  localStorage与sessionStorage
+ - IndexDB
+
+ ## CDN 
+
+
 
 
 
