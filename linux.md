@@ -36,6 +36,7 @@
 22. top  机器信息
 23. systemctl disable firewalld   关闭防火墙
 24. reboot   重启
+25. netstat -anp  
 
 **FHS协议 定义每个目录下放的文件都要一致**
 ## 根目录路径
