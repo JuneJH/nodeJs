@@ -1,0 +1,6 @@
+{
+    "port":9527,  
+    "staticFileType":[".html",".js",".css",".jpg",".png",".gif",".ico",".json"],
+    "assets":"/assets",
+    "service":"/service"
+}

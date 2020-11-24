@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "axios": "^0.21.0",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "log4js": "^6.3.0",
+    "md5": "^2.3.0",
+    "moment": "^2.29.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "mock": "^0.1.1",
+    "mockjs": "^1.1.0"
+  },
+  "scripts": {
+    "start": "nodemon ./src/index.js"
+  }
+}

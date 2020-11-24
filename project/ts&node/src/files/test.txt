@@ -1,0 +1,6 @@
+------WebKitFormBoundaryYMoz4ja5qaTHpLLB
+Content-Disposition: form-data; name="avatar"; filename="新建文本文档.txt"
+Content-Type: text/plain
+
+test
+------WebKitFormBoundaryYMoz4ja5qaTHpLLB--

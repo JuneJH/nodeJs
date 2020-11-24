@@ -1,0 +1,23 @@
+{
+  "name": "ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@types/mysql": "^2.15.15",
+    "class-validator": "^0.12.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5",
+    "ts-node": "^9.0.0"
+  },
+  "scripts": {
+    "dev": "nodemon --watch src -e ts --exec ts-node src/index.ts",
+    "dis": "nodemon ts-node src/index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.7",
+    "@types/validator": "^13.1.0",
+    "typescript": "^4.0.5"
+  }
+}

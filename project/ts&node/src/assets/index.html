@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    hello word!!!
+    <div>
+        <label>
+            <input type="file" id="postFile"/>
+        </label>
+    </div>
+    <div>
+        <img src="../assets/img/front.jpg" download alt="图片" width="100px" height="300px">
+        <a href="/downloadImg">下载</a>
+    </div>
+    <div id="content">
+
+    </div>
+
+    <button id="btn">send request</button>
+
+    <script>
+        const btn = document.getElementById("btn");
+        const content = document.getElementById("content");
+        btn.addEventListener("click",()=>{
+            sendAjax();
+        })
+        function sendAjax(){
+            const xhr = new XMLHttpRequest();
+            xhr.open("get","/getPeople");
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4){
+                    if(xhr.status == 200){
+                        console.log("请求成功");
+                        console.log("请求内容",xhr.responseText)
+                        const data = JSON.parse(xhr.responseText);
+                        let str = "";
+                        data.forEach(item=>{
+                            str += `<p><span style="margin:20px">${item.name}</span><span style="margin:20px">${item.birthday}</span><span style="margin:20px">${item.sex}</span><span style="margin:20px">${item.money}</span></p>`
+                        })
+                        content.innerHTML = str;
+                    }else{
+                        alert("请求失败",xhr.responseText)
+                    }
+                }
+            }
+            xhr.send();
+        }
+        const files = document.getElementById("postFile");
+        files.addEventListener('change', function () {
+            uploadFile(this.files[0])
+
+        });
+
+        function uploadFile(file, callback) {
+            const formData = new FormData();
+            formData.append("avatar", file);
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/postHeader");
+            xhr.send(formData);
+            xhr.onreadystatechange = () => {
+                console.log("上传进度",xhr.upload)
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        alert("0k");
+                        callback && callback();
+                    } else {
+                        alert("上传失败");
+                    }
+                }
+            };
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <label for="username">
+            <input type="text" id="username">
+        </label>
+        <label for="password">
+            <input type="text" id="password">
+        </label>
+        <button id="btn">提交</button>
+    </div>
+    
+    <script src="./index.js"></script>
+    <script>
+        const usernameOm = document.getElementById("username");
+        const passwordom = document.getElementById("password");
+        const btn = document.getElementById("btn");
+
+        btn.addEventListener("click",()=>{
+            const account = usernameOm.value;
+            const password = passwordom.value;
+            // 不包含顺序或倒序账号信息
+            if(checkAccount(account,2,password)){
+                alert("密码中包含了账号信息，应当不包含顺序或倒序账号信息")
+                return;
+            }
+            if(checkAccount(account,2,password,true)){
+                alert("密码中包含了账号信息，应当不包含顺序或倒序账号信息")
+                return;
+            }
+            // 不能为连续或相同数字，字母，键盘3个以上的排序
+            if(checkAccount("0123456789",2,password)){
+                alert("不能为连续或相同数字，字母，键盘3个以上的排序")
+                return;
+            }
+            if(checkAccount("abcdefg",2,password)){
+                alert("不能为连续或相同数字，字母，键盘3个以上的排序")
+                return;
+            }
+
+
+        })
+
+    </script>
+</body>
+</html>
