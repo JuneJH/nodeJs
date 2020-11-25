@@ -1,4 +1,6 @@
 const express = require("express");
+const {decrypt} = require("../utils/crypt");
+const {getErr} = require("../utils/getResponse");
 const router = express.Router();
 const {getStudent, addStudent, deleteStudent, updateStudent} = require("../services/studentsService")
 
@@ -18,7 +20,6 @@ router.route("/:id")
     .patch(async function (req, res) {
         const id = req.params.id;
         const obj = req.body;
-        console.log(id, obj)
         const result = await updateStudent(id, obj);
         if (result != 0) {
             res.json({"status": "ok", "msg": `修改成功`})
@@ -27,19 +28,30 @@ router.route("/:id")
         }
     })
 router.route("/")
-    .get(async function (req, res) {
-        const obj = {
-            page:1,
-            pagesize:100,
+    .get(async function (req, res,next) {
+        try{
+            let token = req.cookies.token;
+            token =token && decrypt(token);
+            console.log(token)
+            if(!token){
+                res.send(getErr("没有权限,请先登录"))
+                return;
+            }
+            const obj = {
+                page:1,
+                pagesize:100,
+            }
+            const query = Object.assign({},obj,req.query);
+            const result = await getStudent(query.page, query.pagesize);
+            res.json(result);
+        }catch (e) {
+            next(e)
         }
-        const query = Object.assign({},obj,req.query);
-        const result = await getStudent(query.page, query.pagesize);
-        res.json(result);
+
     })
     .post(async function (req, res) {
         const body = req.body;
         const result = await addStudent(body);
-        console.log("创建结果", result);
         res.json({"status": "ok", "msg": "创建成功", "data": result})
 
     });

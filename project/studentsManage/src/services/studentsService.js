@@ -21,7 +21,6 @@ exports.updateStudent = async function(id,obj){
 }
 
 exports.getStudent = async function(page,pageSize){
-    console.log(page,pageSize)
     const result = await Student.findAndCountAll({
         attributes:["id","name","sex","birthdate"],
         include:[Class],

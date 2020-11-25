@@ -6,7 +6,6 @@ const sequelize = new Sequelize("studentsDb","root","root",{
     dialect:"mysql",
     logging:(logs,a)=>{
         sqlLog.debug(logs)
-        console.log(a);
     }
 })
 

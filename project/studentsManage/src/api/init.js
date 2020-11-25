@@ -2,12 +2,15 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const student = require("./student");
+const admin = require("./admin");
+const cookieParser = require("cookie-parser");
 //中间件 使用静态资源
 app.use(express.static(path.resolve(__dirname, "../public")))
 //中间件 对body参数进行处理
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-
+// 使用cookie解析中间件
+app.use(cookieParser())
 // app.get("/test/:id", function (req, res) {
 //     console.log("请求头", req.headers);
 //     console.log("请求路径", req.path);
@@ -27,6 +30,11 @@ app.use(express.urlencoded({extended: true}));
 //     throw new Error("中间3抛出一个错误");
 // })
 
+
+//接口
+
+app.use("/student",student);
+app.use(admin);
 // 自定义错误中间件
 app.use((err, req, res, next) => {
     if (err) {
@@ -40,9 +48,6 @@ app.use((err, req, res, next) => {
         next();
     }
 })
-//接口
-
-app.use("/student",student);
 
 
 app.listen(9527, () => {
