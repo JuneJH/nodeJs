@@ -16,7 +16,7 @@ router.post("/login",async (req, res, next) => {
             res.cookie("token", value,{
                 path:"/",
                 domain:"127.0.0.1",
-                maxAge:10000,
+                maxAge:24*60*60*1000,
             })
             res.header("authorization", value);
             res.send(getResult(results))
@@ -33,5 +33,11 @@ router.post("/register",async (req, res, next) => {
     }else{
         res.send(getResult(results))
     }
+})
+router.get("/logout",(req,res)=>{
+    res.cookie("token","",{
+        maxAge:-1,
+    })
+    res.send(getResult("退出成功"))
 })
 module.exports = router;

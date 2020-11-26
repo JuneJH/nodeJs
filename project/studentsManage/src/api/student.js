@@ -29,14 +29,6 @@ router.route("/:id")
     })
 router.route("/")
     .get(async function (req, res,next) {
-        try{
-            let token = req.cookies.token;
-            token =token && decrypt(token);
-            console.log(token)
-            if(!token){
-                res.send(getErr("没有权限,请先登录"))
-                return;
-            }
             const obj = {
                 page:1,
                 pagesize:100,
@@ -44,15 +36,10 @@ router.route("/")
             const query = Object.assign({},obj,req.query);
             const result = await getStudent(query.page, query.pagesize);
             res.json(result);
-        }catch (e) {
-            next(e)
-        }
-
     })
     .post(async function (req, res) {
         const body = req.body;
         const result = await addStudent(body);
         res.json({"status": "ok", "msg": "创建成功", "data": result})
-
     });
 module.exports = router;
