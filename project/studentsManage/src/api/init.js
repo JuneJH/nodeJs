@@ -3,7 +3,13 @@ const path = require("path");
 const app = express();
 const student = require("./student");
 const admin = require("./admin");
+// const session = require("express-session");
 const cookieParser = require("cookie-parser");
+// 加入session
+// app.use(session({
+//     secret:"June",
+//     name:"sessionid"
+// }))
 //检查是否为跨域访问
 app.use(require("../api/middleware/corsMiddleware"))
 // 使用cookie解析中间件

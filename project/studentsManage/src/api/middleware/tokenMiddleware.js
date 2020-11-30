@@ -1,18 +1,22 @@
+const {verify} = require("../tool/jwt");
 const {getErr} = require("../../utils/getResponse");
-const {decrypt} = require("../../utils/crypt");
+// const {decrypt} = require("../../utils/crypt");
 const {pathToRegexp} = require("path-to-regexp");//把字符串装成正则对象
 
 const needTokenApi = [
-    // {
-    //     url:"/student",
-    //     method:"GET",
-    // },
+    {
+        url:"/student",
+        method:"GET",
+    },
     {
         url:"/student",
         method:"POST",
     },   {
         url:"/student",
         method:"PATCH",
+    },   {
+        url:"/whoIam",
+        method:"GET",
     }
 ]
 module.exports = (req,res,next)=>{
@@ -24,17 +28,22 @@ module.exports = (req,res,next)=>{
         next();
         return;
     }
-    let token = req.cookies.token;
-    token || (token = req.headers.authorization);
-    if(!token){
-        // 没有权限
-        noTokenHandler(req,res,next);
-        return ;
+    const result = verify(req);
+    if(!result){
+       noTokenHandler(req,res,next);
+       return ;
     }
-    token && (token=decrypt(token))
-    req.userId = token;
+    // let token = req.cookies.token;
+    // token || (token = req.headers.authorization);
+    // if(!token){
+    //     // 没有权限
+    //     noTokenHandler(req,res,next);
+    //     return ;
+    // }
+    // token && (token=decrypt(token))
+    // req.userId = token;
+    req.user = result;
     next();
-
 }
 
 function noTokenHandler(req,res,next){
