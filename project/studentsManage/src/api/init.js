@@ -3,14 +3,25 @@ const path = require("path");
 const app = express();
 const student = require("./student");
 const admin = require("./admin");
+// const session = require("express-session");
 const cookieParser = require("cookie-parser");
+// 加入session
+// app.use(session({
+//     secret:"June",
+//     name:"sessionid"
+// }))
+//检查是否为跨域访问
+app.use(require("../api/middleware/corsMiddleware"))
+// 使用cookie解析中间件
+app.use(cookieParser())
+//验证权限
+app.use(require("../api/middleware/tokenMiddleware"))
 //中间件 使用静态资源
 app.use(express.static(path.resolve(__dirname, "../public")))
 //中间件 对body参数进行处理
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-// 使用cookie解析中间件
-app.use(cookieParser())
+
 // app.get("/test/:id", function (req, res) {
 //     console.log("请求头", req.headers);
 //     console.log("请求路径", req.path);

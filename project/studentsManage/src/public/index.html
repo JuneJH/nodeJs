@@ -5,18 +5,51 @@
     <title>hello word</title>
 </head>
 <body>
-    <h1>登录</h1>
-    <form action="./login" method="post">
-        <label>
-            <input type="text" name="loginId">
-        </label>
-        <label>
-            <input type="password" name="loginPassword">
-        </label>
-        <label>
-            <input type="submit" value="登录">
-        </label>
+<h1>登录</h1>
+<form action="./login" method="post">
+    <label>
+        <input type="text" name="loginId">
+    </label>
+    <label>
+        <input type="password" name="loginPassword">
+    </label>
+    <label>
+        <input type="submit" value="登录">
+    </label>
+</form>
 
-    </form>
+<button id="login">登录</button>
+<button id="getStudent">获取学生列表</button>
+
+<script>
+    login.onclick = () => {
+        fetch("http://127.0.0.1:9527/login", {
+            method: "post",
+            data: {
+                loginId: 2019,
+                loginPassword: "123"
+            }
+        }).then(data => data.json()).then(data => {
+            console.log(data);
+        })
+    }
+    getStudent.onclick = () => {
+        fetch("http://127.0.0.1:9527/student", {
+            method: "get",
+            headers: {
+                myHeader: "this is my header"
+            },
+            credentials:"include"
+        }).then(data => {
+            console.log(data.headers.get("my-header"))
+            console.log(data.headers.get("my-header1"))
+            return data.json()
+        }).then(data => {
+            console.log(data);
+        })
+    }
+
+</script>
 </body>
+
 </html>
