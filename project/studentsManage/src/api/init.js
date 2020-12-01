@@ -11,7 +11,7 @@ const cookieParser = require("cookie-parser");
 //     name:"sessionid"
 // }))
 //检查是否为跨域访问
-app.use(require("../api/middleware/corsMiddleware"))
+// app.use(require("../api/middleware/corsMiddleware"))
 // 使用cookie解析中间件
 app.use(cookieParser())
 //验证权限

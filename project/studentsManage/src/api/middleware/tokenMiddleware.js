@@ -17,6 +17,9 @@ const needTokenApi = [
     },   {
         url:"/whoIam",
         method:"GET",
+    },{
+    url:"/register",
+        method: "POST"
     }
 ]
 module.exports = (req,res,next)=>{

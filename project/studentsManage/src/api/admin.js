@@ -31,6 +31,7 @@ router.post("/login",async (req, res, next) => {
     }
 })
 router.post("/register",async (req, res, next) => {
+    console.log("添加一个用户",req.body)
     const results = await addAdmin(req.body);
     if(!results){
         res.send(getResult("注册失败"))
