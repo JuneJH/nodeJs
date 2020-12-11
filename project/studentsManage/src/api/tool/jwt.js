@@ -4,15 +4,17 @@ const secrecy = "****";
 //  颁发
 
 exports.publish = function (res,maxAge = 3600,info={}){
-    console.log('run jwt')
     const token = jwt.sign(info,secrecy,{
         expiresIn:maxAge
+    })
+    res.cookie("token",token,{
+        sameSite:"lax",
     })
     res.header("authorization",token);
 }
 
 exports.verify = function (req){
-    let token = req.headers.authorization;
+    let token = req.headers.authorization || (req.headers.cookie && req.headers.cookie.split("=")[1]);
     if(!token){
         return  null;
     }

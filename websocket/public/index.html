@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>send a message!!!</button>
+<script src="https://cdn.bootcdn.net/ajax/libs/socket.io/3.0.0-rc4/socket.io.js"></script>
+<script>
+    const socket = io();
+    socket.on("service",(msg)=>{
+        console.log(msg);
+    })
+    socket.on("disconnect",()=>{
+        console.log("断开连接")
+    })
+    document.querySelector("button").onclick = ()=>{
+        socket.emit("client","this is message from client!!!")
+    }
+</script>
+</body>
+</html>

