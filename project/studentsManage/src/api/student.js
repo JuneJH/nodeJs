@@ -29,10 +29,11 @@ router.route("/:id")
     })
 router.route("/")
     .get(async function (req, res,next) {
-            const obj = {
+            let obj = {
                 page:1,
                 pagesize:100,
             }
+            obj = Object.assign({},obj,req.query);
             const query = Object.assign({},obj,req.query);
             const result = await getStudent(query.page, query.pagesize);
             res.json(result);
@@ -42,4 +43,6 @@ router.route("/")
         const result = await addStudent(body);
         res.json({"status": "ok", "msg": "创建成功", "data": result})
     });
+
+router.route("/").post()
 module.exports = router;
