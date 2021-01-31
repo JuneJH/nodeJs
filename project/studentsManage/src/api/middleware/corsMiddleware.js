@@ -1,4 +1,4 @@
-const allowOrigins = ["http://localhost:63342"]
+const allowOrigins = ["http://localhost:63342","http://localhost:3000","http://localhost:9527","http://localhost:12306",]
 module.exports = (req,res,next)=>{
     if(req.method === "OPTIONS"){
         res.setHeader("Access-control-allow-method",req.headers["access-control-request-method"]);
