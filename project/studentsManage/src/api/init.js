@@ -3,6 +3,7 @@ const path = require("path");
 const app = express();
 const student = require("./student");
 const admin = require("./admin");
+const book = require("./book")
 // const session = require("express-session");
 const cookieParser = require("cookie-parser");
 // 加入session
@@ -46,6 +47,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.use("/student",student);
 app.use(admin);
+app.use("/book",book)
 // 自定义错误中间件
 app.use((err, req, res, next) => {
     if (err) {

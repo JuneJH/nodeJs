@@ -17,3 +17,14 @@ exports.updateBook = async function (id,obj){
         }
     })
 }
+
+exports.getBook = async function(page,pageSize){
+    const result = await Book.findAndCountAll({
+        offset:(page - 1) * pageSize,
+        limit:+pageSize
+    })
+    return {
+        total:result.count,
+        data:JSON.parse(JSON.stringify(result.rows))
+    };
+}
