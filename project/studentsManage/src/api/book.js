@@ -38,6 +38,7 @@ router.route("/")
     })
     .post(async function (req, res) {
         const body = req.body;
+        console.log(body)
         const result = await addBook(body);
         res.json({"status": "ok", "msg": "创建成功", "data": result})
     });

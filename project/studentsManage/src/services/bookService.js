@@ -2,7 +2,7 @@ const Book = require('../models/Book');
 const {DataTypes} = require('sequelize');
 
 exports.addBook = async function (obj){
-    return await Book.create(obj).toJSON();
+    return  Book.create(obj);
 }
 exports.deleteBook = async function (id){
     return await Book.destroy({
