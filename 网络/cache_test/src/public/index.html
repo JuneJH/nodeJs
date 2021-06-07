@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTTP网络缓存机制</title>
+  </head>
+  <body>
+    <button id="btn">发送请求获取服务端累加器</button>
+    <div>从服务端获取的累加器:<span id="count"></span></div>
+    <h1>hello HTTP 网络缓存机制</h1>
+    <h2 id="h2">引用了字体样式:123</h2>
+    <img src="./性能优化.jpg" />
+    <img src="./big.jpeg"/>
+  
+  </body>
+  <script src="./jquery-3.6.0.js"></script>
+  <script>
+    $("#h2").css({
+      color: "red",
+    });
+    function add() {
+      $.ajax("/getCache").then((res) => {
+        $("#count").text(res.data);
+      });
+    }
+    $("#btn").on("click",add)
+  </script>
+</html>
