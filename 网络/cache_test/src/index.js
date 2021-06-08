@@ -2,17 +2,28 @@ const express = require("express");
 const path = require("path");
 const app = express();
 
-let count = 1;
 app.use("",express.static(path.join(__dirname,"./public"),{
     lastModified:false,
     etag:false,
+    maxAge:10000,
 }))
 
-app.use("/getCache",(req,res)=>{
+let count = 1;
+app.get("/getCache",(req,res)=>{
+    console.log("收到请求")
+    res.setHeader("expires",new Date(+new Date() + 30000))
     res.send({
         data:count
     })
-    // count ++;
+    count ++;
+})
+app.post("/postCache",(req,res)=>{
+    console.log("收到请求")
+    res.setHeader("expires",new Date(+new Date() + 30000))
+    res.send({
+        data:count
+    })
+    count ++;
 })
 
 
